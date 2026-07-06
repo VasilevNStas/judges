@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'base64'
+require 'digest'
 require 'elapsed'
 require 'factbase'
 require 'fileutils'
@@ -91,13 +92,13 @@ class Judges::Print
         'hidden' => opts['hidden'] || '_id,_version,_time,_job',
         'highlighted' => opts['highlighted'] || 'stale,tombstone',
         'version' => Judges::VERSION,
-        'css_hash' => sha384(opts, 'index.css'),
-        'js_hash' => sha384(opts, 'index.js')
+        'css_hash' => sha256(opts, 'index.css'),
+        'js_hash' => sha256(opts, 'index.js')
       )
     )
   end
 
-  def sha384(opts, asset)
+  def sha256(opts, asset)
     return 'sha256-offline' if opts['offline']
     with_retries do
       url = "https://yegor256.github.io/judges/assets/#{asset}"

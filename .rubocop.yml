@@ -53,7 +53,7 @@ Elegant/GoodMethodName:
     - import_to
     - loop_them
     - one_judge
-    - sha384
+    - sha256
     - save_it
     - '+'
     - build_options
