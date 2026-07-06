@@ -54,10 +54,8 @@ class Judges::Categories
   def ok?(cats)
     cats = [] if cats.nil?
     cats = [cats] unless cats.is_a?(Array)
-    cats.each do |c|
-      return false if @disable.any?(c)
-      return true if @enable.any?(c)
-    end
+    return false if cats.any? { |c| @disable.any?(c) }
+    return true if cats.any? { |c| @enable.any?(c) }
     return true if @enable.empty?
     false
   end
