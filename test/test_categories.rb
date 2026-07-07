@@ -22,6 +22,13 @@ class TestCategories < Minitest::Test
     refute(cats.ok?(nil))
   end
 
+  def test_disable_dominates_no_matter_order
+    cats = Judges::Categories.new(%w[foo bar], ['bad'])
+    refute(cats.ok?(%w[bad other]))
+    refute(cats.ok?(%w[foo bad]))
+    refute(cats.ok?(%w[other bad foo]))
+  end
+
   def test_all_enabled
     cats = Judges::Categories.new([], ['bad'])
     assert(cats.ok?(nil))
