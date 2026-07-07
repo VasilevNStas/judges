@@ -131,6 +131,24 @@ class TestTest < Minitest::Test
     end
   end
 
+  def test_assert_once_honored
+    Dir.mktmpdir do |d|
+      save_it(File.join(d, 'foo/foo.rb'), '$fb.insert.foo = 42')
+      save_it(
+        File.join(d, 'foo/x.yml'),
+        <<-YAML
+        runs: 3
+        assert_once: false
+        input: []
+        expected:
+          - /fb/f[foo = 42]
+        YAML
+      )
+      Judges::Test.new(Loog::NULL).run({}, [d])
+      assert_path_exists(d)
+    end
+  end
+
   def test_with_expected_failure
     Dir.mktmpdir do |d|
       save_it(File.join(d, 'foo/foo.rb'), 'raise "this is intentional";')

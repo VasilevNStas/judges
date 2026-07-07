@@ -232,7 +232,7 @@ class Judges::Test
         end
       end
       next unless assert
-      assert(judge, tname, fb, yaml) if r == runs || opts['assert_once'].is_a?(FalseClass)
+      assert(judge, tname, fb, yaml) if r == runs || yaml['assert_once'].is_a?(FalseClass)
     end
   end
   # rubocop:enable Metrics/MethodLength
