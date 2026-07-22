@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- * SPDX-FileCopyrightText: Copyright (c) 2024-2026 Yegor Bugayenko
- * SPDX-License-Identifier: MIT
+* SPDX-FileCopyrightText: Copyright (c) 2024-2026 Yegor Bugayenko
+* SPDX-License-Identifier: MIT
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="xml" omit-xml-declaration="yes" encoding="UTF-8" indent="yes"/>
@@ -26,7 +26,7 @@
     <link href="{$url}" rel="stylesheet" integrity="{$hash}" crossorigin="anonymous"/>
   </xsl:template>
   <xsl:template match="/">
-    <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
+    <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;</xsl:text>
     <html>
       <head>
         <meta charset="UTF-8"/>
@@ -213,14 +213,13 @@
           <xsl:for-each select="$f/*">
             <xsl:text> </xsl:text>
             <xsl:variable name="visible" select="string-length(substring-before(concat(' ,', $hidden, ','), concat(',', name(), ','))) = 0"/>
-            <xsl:variable name="is-highlighted" select="contains(concat(',', $highlighted, ','),
-            concat(',', name(), ','))"/>
+            <xsl:variable name="is-highlighted" select="contains(concat(',', $highlighted, ','),             concat(',', name(), ','))"/>
             <xsl:if test="string-length(substring-before(concat(' ,', $columns, ','), concat(',', name(), ','))) = 0">
               <xsl:choose>
                 <xsl:when test="$visible">
                   <span>
                     <xsl:if test="$is-highlighted">
-                        <xsl:attribute name="class">highlighted</xsl:attribute>
+                      <xsl:attribute name="class">highlighted</xsl:attribute>
                     </xsl:if>
                     <xsl:value-of select="name()"/>
                   </span>
@@ -234,7 +233,7 @@
               <xsl:if test="$visible">
                 <span>
                   <xsl:if test="$is-highlighted">
-                      <xsl:attribute name="class">highlighted</xsl:attribute>
+                    <xsl:attribute name="class">highlighted</xsl:attribute>
                   </xsl:if>
                   <xsl:text>:</xsl:text>
                   <xsl:call-template name="value">
